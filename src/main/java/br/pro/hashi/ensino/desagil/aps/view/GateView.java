@@ -41,7 +41,7 @@ public class GateView extends FixedPanel implements ActionListener, MouseListene
         input1.addActionListener(this);
 
         three = new Switch();
-        output = new Light(255, 0, 0);
+        output = new Light(255, 0, 0, 0, 0, 0);
 
         output.connect(0, three);
 
@@ -140,7 +140,13 @@ public class GateView extends FixedPanel implements ActionListener, MouseListene
 
         if (Dist <= Radius) {
             color = JColorChooser.showDialog(this, null, color);
-            output.setColor(color);
+
+            if (gate.read()) {
+                output.setColor(color);
+            } else {
+                output.setOffColor(color);
+            }
+
             repaint();
         }
     }
